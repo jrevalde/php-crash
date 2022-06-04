@@ -1,54 +1,87 @@
 <?php
+/* ----------- Arrrays ----------- */
 
-//there are two ways to declare an array in php
-$colors = ["red", "blue", "yellow"];
+/*
+  If you need to store multiple values, you can use arrays. Arrays hold "elements"
+*/
 
-$numbers = array(1, 2, 3);
+// Simple array of numbers
+$numbers = [1, 2, 3, 4, 5];
 
-// extract a value in an array
+// Simple array of strings
+$colors = ['red', 'blue', 'green'];
 
-echo $colors[0] . "<br/>";
+// Using the array function to create an array of numbers
+$numbers = [1, 2, 3, 4, 5];
 
-echo $numbers[1] . "<br/>";
+// Outputting values from an array
+echo $numbers[0];
+echo $numbers[3] + $numbers[4];
 
+// We can use print_r or var_dump to see the contents of an array
+var_dump($numbers);
 
-//We can put arrays inside of arrays
+/* ------ Associative Arrays ----- */
 
-$array_set = 
-[
-    $colors, //["red", "blue", "yellow"]
-    $numbers, //$numbers = array(1, 2, 3)
+/*
+  Associative arrays allow us to use named keys to identify values.
+*/
+
+$colors = [
+  1 => 'red',
+  2 => 'green',
+  3 => 'blue',
 ];
 
-//to get a value from an array inside of an array do this:
+// echo $colors[1];
 
-echo $array_set[0][1] . "<br/>"; //this will print out blue
-
-//We can create a structure very similar to a JSON file
-
-$array_set2 =
-[
-    [
-        'first_name'=> "jethro",
-        'age' => 24
-    ],
-    [
-        'first_name'=> "cholby",
-        'age' => 15
-    ]
+// Strings as keys
+$hex = [
+  'red' => '#f00',
+  'green' => '#0f0',
+  'blue' => '#00f',
 ];
 
+echo $hex['red'];
+var_dump($hex);
 
-//to get the value frome soething likethis we do
+/* ---- Multi-dimensional arrays ---- */
 
-echo $array_set2[0]['first_name'] . "<br/>"; //this prints out "jethro"
+/*
+  Multi-dimansional arrays are often used to store data in a table format.
+*/
 
-//A lot of times when we are working with API in php we will need to convert this kind of array to json. we use the json_encode()
-$json_array = json_encode($array_set2);
-echo  $json_array . "<br/>";
+// Single person
+$person1 = [
+  'first_name' => 'Brad',
+  'last_name' => 'Traversy',
+  'email' => 'brad@gmail.com',
+];
 
-//likewise, if we want to convert a json object into a php array we use json_decode()
-$decoded_array = json_decode($json_array);
-echo $decoded_array ;
+// Array of people
+$people = [
+  $person1, //   [...$person1]
+  [
+    'first_name' => 'John',
+    'last_name' => 'Doe',
+    'email' => 'john@gmail.com',
+  ],
+  [
+    'first_name' => 'Jane',
+    'last_name' => 'Doe',
+    'email' => 'jane@gmail.com',
+  ],
+];
 
-?>
+var_dump($people);
+
+// Accessing values in a multi-dimensional array
+echo $people[0]['first_name'];
+echo $people[2]['email'];
+
+// Encode to JSON
+var_dump(json_encode($people));
+
+// Decode from JSON
+$jsonobj = '{"first_name":"Brad","last_name": "Traversy","email":"brad@gmail.com"}';
+var_dump(json_decode($jsonobj));
